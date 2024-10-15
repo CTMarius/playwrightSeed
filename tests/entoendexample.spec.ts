@@ -1,4 +1,4 @@
-import { test, expect } from './../fixtures/fixtures'; // Import the custom fixtures
+import { test, expect } from '../fixtures/fixtures'; // Import the custom fixtures
 const baseURL = "https://keen-ardinghelli-99a36b30.netlify.app/";
 
 test.describe("Notes application", () => {
