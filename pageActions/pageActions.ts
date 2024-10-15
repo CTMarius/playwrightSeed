@@ -17,6 +17,6 @@ export class PageActions {
   }
 
   async selectDate(date: string) {
-    await this.mainPage.datePicker.fill(date); // Adjust based on how your date picker works
+    await this.mainPage.datePicker.fill(date);
   }
 }

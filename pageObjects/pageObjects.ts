@@ -9,8 +9,8 @@ export class MainPage {
   constructor(page: Page) {
     this.page = page;
     // Locators
-    this.textField = page.locator('#textarea'); // Replace with actual text field ID
-    this.saveButton = page.locator('#save'); // Replace with actual save button ID
-    this.datePicker = page.locator('#datePickerId'); // Replace with actual date picker ID
+    this.textField = page.locator('#textarea'); 
+    this.saveButton = page.locator('#save'); 
+    this.datePicker = page.locator('#datepicker'); 
   }
 }
