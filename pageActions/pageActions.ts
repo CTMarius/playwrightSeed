@@ -7,7 +7,7 @@ export class PageActions {
   constructor(page: Page) {
     this.mainPage = new MainPage(page);
   }
-
+  
   async fillTextField(text: string) {
     await this.mainPage.textField.fill(text);
   }
