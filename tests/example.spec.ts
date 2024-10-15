@@ -1,25 +1,34 @@
 import { test, expect } from "@playwright/test";
-
+const baseURL = "https://keen-ardinghelli-99a36b30.netlify.app/"
 test.describe("Notes application", () => {
   test("@saveButton Save button changes status", async ({ page }) => {
     await test.step("Navigate to the main page", async () => {
-      await page.goto("URL_TO_YOUR_APPLICATION");
-    });
-
-    await test.step("Type text in the text field", async () => {
-      await page.fill('input[type="text"]', "GB");
+      await page.goto(baseURL);
     });
 
     await test.step("Check initial save button status", async () => {
+      const status = await page.getAttribute('[id="save"]', "disabled")
+      console.log(status)
       expect(
-        await page.getAttribute('button[data-testid="saveButton"]', "disabled"),
+       status === "disabled",
+      ).toBeTruthy();
+    });
+
+    await test.step("Type text in the text field", async () => {
+      await page.fill('[id="textarea"]', "GB");
+    });
+
+    await test.step("Check save button status after filling in text", async () => {
+      expect(
+        await page.getAttribute('[id="save"]', "disabled"),
       ).toBeFalsy();
     });
 
+
     await test.step("Clear text field and check save button status", async () => {
-      await page.fill('input[type="text"]', "");
+      await page.fill('[id="textarea"]', "");
       expect(
-        await page.getAttribute('button[data-testid="saveButton"]', "disabled"),
+        await page.getAttribute('[id="save"]', "disabled"),
       ).toBeTruthy();
     });
   });
