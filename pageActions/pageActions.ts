@@ -44,10 +44,27 @@ export class PageActions {
     await this.waitForLoadingIndicator();
   }
 
-  async triggerInvalidDateEvent() {
-    await this.page.evaluate(() => {
-      const event = new CustomEvent('invalidDate', { detail: { date: 'invalid' } });
+  async triggerInvalidDateEvent(invalidDate?: string) {
+    await this.page.evaluate((date) => {
+      const event = new CustomEvent('invalidDate', { detail: { date: date || 'invalid' } });
       document.dispatchEvent(event);
-    });
+    }, invalidDate);
+  }
+
+  /**
+   * Waits for the page to load and process API responses
+   * @param timeout The timeout in milliseconds
+   */
+  async waitForPageLoad(timeout = 2000): Promise<void> {
+    await this.page.waitForTimeout(timeout);
+  }
+
+  /**
+   * Reloads the page and waits for it to load
+   * @param timeout The timeout in milliseconds
+   */
+  async reloadPageAndWait(timeout = 2000): Promise<void> {
+    await this.page.reload();
+    await this.waitForPageLoad(timeout);
   }
 }

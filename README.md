@@ -158,6 +158,8 @@ The `pageActions/pageActions.ts` file contains:
 - User interactions with the application
 - Methods for filling forms, clicking buttons, etc.
 - Methods for handling special events
+- Utility functions for page loading and navigation
+- Methods for triggering custom events
 
 ## Test Configuration
 
@@ -187,6 +189,7 @@ npx playwright show-report
 5. **Mocking**: Use mocks directory for mock data and responses
 6. **Test Organization**: Organize tests by type (e2e, integration, api)
 7. **Type Safety**: Use TypeScript interfaces for better type safety
+8. **Consolidation**: Keep related functionality in a single place (e.g., all page actions in the PageActions class)
 
 ## Contributing
 
