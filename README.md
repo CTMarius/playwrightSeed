@@ -5,13 +5,13 @@ This project contains an end-to-end testing framework built with Playwright, fol
 ## Project Structure
 
 ```
+├── data/              # Test data files
 ├── fixtures/          # Test fixtures and custom test configurations
 ├── mocks/             # Mock data and API responses
 ├── pageActions/       # Page action classes that handle user interactions
 ├── pageObjects/       # Page object classes that define element locators
 ├── tests/             # Test files containing test cases
 │   ├── api/           # API tests
-│   ├── data/          # Test data files
 │   ├── endtoend/      # End-to-end tests
 │   └── integration/   # Integration tests
 ├── test-results/      # Test execution results and reports
@@ -20,15 +20,20 @@ This project contains an end-to-end testing framework built with Playwright, fol
 
 ## Directory Details
 
+- **data/**: Test data files
+  - **testNotes.ts**: Test data for notes content
+  - **testDates.ts**: Test data for date-related tests
 - **fixtures/**: Custom test fixtures that extend Playwright's base fixtures
+  - **fixtures.ts**: Custom fixtures for page objects and page actions
 - **mocks/**: Mock data and API responses for testing
   - **notesApiInterceptors.ts**: API interceptors for mocking API responses
   - **notesMockData.ts**: Mock data and helper functions for testing
 - **pageActions/**: Classes that implement user interactions with page elements
+  - **pageActions.ts**: Page actions for interacting with the application
 - **pageObjects/**: Classes that define element locators and page structure
+  - **pageObjects.ts**: Page objects for the application
 - **tests/**: Contains all test files with test cases
   - **api/**: API tests
-  - **data/**: Test data files (e.g., testNotes.ts)
   - **endtoend/**: End-to-end tests that test complete user flows
   - **integration/**: Integration tests that test specific features and edge cases
 - **test-results/**: Stores test execution results and reports
@@ -104,10 +109,22 @@ API tests test the API endpoints directly. These tests are located in the `tests
 
 ## Test Data
 
-Test data is stored in the `tests/data/` directory. The main test data file is `testNotes.ts`, which contains:
-- Different types of test notes (short, medium, long, etc.)
-- Special content types (multiline, unicode, HTML, emoji)
-- TypeScript interfaces for type safety
+Test data is stored in the `data/` directory. The main test data files are:
+
+### testNotes.ts
+Contains different types of test notes:
+- Short notes
+- Medium notes
+- Long notes
+- Special content (multiline, unicode, HTML, emoji)
+
+### testDates.ts
+Contains date-related test data:
+- Leap year dates
+- Month end dates
+- Invalid dates
+- Test dates
+- Future dates
 
 ## Mocking
 
@@ -126,6 +143,21 @@ The `mocks/notesApiInterceptors.ts` file contains:
 - Error handling
 - Network simulation (delays, errors)
 - Specific mock functions for different test scenarios
+
+## Page Objects and Page Actions
+
+The project follows the Page Object Model pattern:
+
+### Page Objects
+The `pageObjects/pageObjects.ts` file contains:
+- Element locators for the application
+- Page structure definitions
+
+### Page Actions
+The `pageActions/pageActions.ts` file contains:
+- User interactions with the application
+- Methods for filling forms, clicking buttons, etc.
+- Methods for handling special events
 
 ## Test Configuration
 
@@ -150,7 +182,7 @@ npx playwright show-report
 
 1. **Page Objects**: Keep element locators in page object classes
 2. **Page Actions**: Implement user interactions in page action classes
-3. **Test Data**: Store test data separately in the tests/data directory
+3. **Test Data**: Store test data separately in the data directory
 4. **Fixtures**: Use fixtures for common setup and teardown operations
 5. **Mocking**: Use mocks directory for mock data and responses
 6. **Test Organization**: Organize tests by type (e2e, integration, api)
