@@ -6,7 +6,6 @@ export class MainPage {
   readonly saveButton: Locator;
   readonly datePicker: Locator;
   readonly errorMessage: Locator;
-  readonly loadingIndicator: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -15,6 +14,5 @@ export class MainPage {
     this.saveButton = page.getByRole("button", { name: "Save" });
     this.datePicker = page.locator('#datepicker');
     this.errorMessage = page.locator('.error-message');
-    this.loadingIndicator = page.locator('.loading-indicator');
   }
 }

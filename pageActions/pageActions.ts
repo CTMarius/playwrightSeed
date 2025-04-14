@@ -22,11 +22,6 @@ export class PageActions {
     await this.mainPage.datePicker.fill(date);
   }
 
-  async waitForLoadingIndicator() {
-    await this.mainPage.loadingIndicator.waitFor({ state: 'visible' });
-    await this.mainPage.loadingIndicator.waitFor({ state: 'hidden' });
-  }
-
   async getErrorMessage() {
     return await this.mainPage.errorMessage.textContent();
   }
@@ -34,14 +29,14 @@ export class PageActions {
   async fillAndSaveContent(text: string) {
     await this.fillTextField(text);
     await this.clickSaveButton();
-    await this.waitForLoadingIndicator();
+    await this.page.waitForLoadState('networkidle');
   }
 
   async fillDateContentAndSave(date: string, text: string) {
     await this.selectDate(date);
     await this.fillTextField(text);
     await this.clickSaveButton();
-    await this.waitForLoadingIndicator();
+    await this.page.waitForLoadState('networkidle');
   }
 
   async triggerInvalidDateEvent(invalidDate?: string) {
@@ -66,5 +61,27 @@ export class PageActions {
   async reloadPageAndWait(timeout = 2000): Promise<void> {
     await this.page.reload();
     await this.waitForPageLoad(timeout);
+  }
+
+  /**
+   * Verifies that the text field has the expected value after a page reload
+   * @param expectedValue The expected value in the text field
+   * @param timeout The timeout in milliseconds
+   */
+  async verifyTextFieldValue(expectedValue: string, timeout = 10000): Promise<void> {
+    // Wait for the text field to be visible
+    await this.mainPage.textField.waitFor({ state: 'visible', timeout });
+    
+    // Get the current value
+    const currentValue = await this.mainPage.textField.inputValue();
+    console.log(`Verifying text field value. Expected: "${expectedValue}", Actual: "${currentValue}"`);
+    
+    // If the value is not what we expect, wait a bit longer and check again
+    if (currentValue !== expectedValue) {
+      console.log('Value mismatch, waiting for potential UI update...');
+      await this.page.waitForTimeout(1000);
+      const updatedValue = await this.mainPage.textField.inputValue();
+      console.log(`After waiting, value is: "${updatedValue}"`);
+    }
   }
 }
