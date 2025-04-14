@@ -1,4 +1,4 @@
-import { testNotes } from '../tests/data/testNotes';
+import { testNotes } from '../data/testNotes';
 
 // Types for our mock data
 export interface NoteEntry {

@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/fixtures';
-import { testNotes } from '../data/testNotes';
+import { testNotes } from '../../data/testNotes';
 
 const baseURL = "https://keen-ardinghelli-99a36b30.netlify.app/";
 

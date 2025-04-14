@@ -11,7 +11,7 @@ import {
   updateEntry,
   deleteEntry
 } from './notesMockData';
-import { testNotes } from '../tests/data/testNotes';
+import { testNotes } from '../data/testNotes';
 
 /**
  * Sets up API interceptors for the notes API

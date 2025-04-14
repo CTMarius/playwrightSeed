@@ -3,8 +3,8 @@ import { setupNotesApiInterceptors, setupTestSpecificMock, setupNetworkErrorMock
 import { clearMockData } from '../../mocks/notesMockData';
 import { PageActions } from '../../pageActions/pageActions';
 import { MainPage } from '../../pageObjects/pageObjects';
-import { testNotes } from '../data/testNotes';
-import { testDates } from '../data/testDates';
+import { testNotes } from '../../data/testNotes';
+import { testDates } from '../../data/testDates';
 
 const baseURL = "https://keen-ardinghelli-99a36b30.netlify.app";
 
