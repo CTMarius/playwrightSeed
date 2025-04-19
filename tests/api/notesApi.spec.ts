@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { APIRequestContext } from '@playwright/test';
+import { testNotes } from '../../data/testNotes';
+import { testDates } from '../../data/testDates';
 
 const baseURL = "https://keen-ardinghelli-99a36b30.netlify.app/api";
 
@@ -18,8 +20,8 @@ test.describe('Notes API', () => {
 
   test('should create a new entry', async () => {
     const entryData = {
-      date: "2025-04-14",
-      content: "Test entry content"
+      date: testDates.futureDate,
+      content: testNotes.medium
     };
 
     const response = await request.post('/entry', {
@@ -33,7 +35,7 @@ test.describe('Notes API', () => {
   });
 
   test('should retrieve an entry by date', async () => {
-    const date = "2025-04-14";
+    const date = testDates.futureDate;
     const response = await request.get(`/entry?date=${date}`);
     
     expect(response.ok()).toBeTruthy();
@@ -43,14 +45,14 @@ test.describe('Notes API', () => {
   });
 
   test('should return 404 for non-existent date', async () => {
-    const date = "2099-12-31"; // Future date that shouldn't exist
+    const date = testDates.futureDate; // Use a future date that shouldn't exist
     const response = await request.get(`/entry?date=${date}`);
     
     expect(response.status()).toBe(404);
   });
 
   test('should handle invalid date format', async () => {
-    const invalidDate = "2025-13-45"; // Invalid date
+    const invalidDate = testDates.invalidDate; // Invalid date
     const response = await request.get(`/entry?date=${invalidDate}`);
     
     expect(response.status()).toBe(400);
@@ -64,7 +66,7 @@ test.describe('Notes API', () => {
 
   test('should handle invalid POST request body', async () => {
     const invalidData = {
-      date: "2025-13-45", // Invalid date
+      date: testDates.invalidDate, // Invalid date
       content: "" // Empty content
     };
 
@@ -77,7 +79,7 @@ test.describe('Notes API', () => {
 
   test('should handle POST request with missing required fields', async () => {
     const incompleteData = {
-      date: "2025-04-14"
+      date: testDates.futureDate
       // Missing content field
     };
 
@@ -87,4 +89,4 @@ test.describe('Notes API', () => {
     
     expect(response.status()).toBe(400);
   });
-}); 
+});
