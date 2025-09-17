@@ -96,13 +96,21 @@ End-to-end tests test complete user flows and real-world scenarios. These tests 
 - State persistence
 
 ### Integration Tests
-Integration tests test specific features and edge cases. These tests are located in the `tests/integration/` directory and focus on:
-- Testing specific features in isolation
-- Testing edge cases and error conditions
-- Testing API interactions
-- Testing concurrent operations
-- Testing performance characteristics
-- Testing data validation
+Integration tests verify specific features and edge cases. These tests are located in the `tests/integration/` directory and follow a clear structure:
+
+#### Test Organization
+- Tests use consistent mock setup in `beforeEach`
+- Each test focuses on a specific behavior
+- Mocks are easily overridden for special cases
+- Clear separation between test logic and mock setup
+
+#### Test Coverage
+- Basic functionality (save, load)
+- Edge cases (leap years, month ends)
+- Special content handling (multiline, unicode, HTML)
+- Error conditions (network errors)
+- Performance aspects (slow responses)
+- Data validation and persistence
 
 ### API Tests
 API tests test the API endpoints directly. These tests are located in the `tests/api/` directory.
@@ -128,21 +136,44 @@ Contains date-related test data:
 
 ## Mocking
 
-The project uses a robust mocking system for API responses:
+The project uses a clean and maintainable mocking system for API responses:
 
-### Mock Data
-The `mocks/notesMockData.ts` file contains:
-- Mock data for the notes API
-- Helper functions for common operations
-- Functions to simulate network conditions (delays, errors)
-- CRUD operations (create, read, update, delete)
+### Mock Responses
+The `mocks/responses/` directory contains separate JSON files for different response types:
+- `getEntry.json`: Standard GET response
+- `saveEntry.json`: Standard POST/save response
+- `specialContent.json`: Special content cases (multiline, unicode, HTML, emoji)
+- `edgeCases.json`: Edge cases (leap year, month-end dates)
+- `slowResponse.json`: Slow network response data
 
-### API Interceptors
-The `mocks/notesApiInterceptors.ts` file contains:
-- API interceptors for different HTTP methods (GET, POST, PUT, DELETE)
-- Error handling
-- Network simulation (delays, errors)
-- Specific mock functions for different test scenarios
+### API Mocks
+The `mocks/apiMocks.ts` file contains:
+- Centralized API endpoint patterns
+- Self-contained mock functions for each scenario
+- Clear setup pattern with `setup*Mock` naming convention
+- Automatic handling of HTTP methods
+- Built-in network simulation (delays, errors)
+
+Example of using mocks in tests:
+```typescript
+test.beforeEach(async ({ page }) => {
+  // Setup default mocks
+  await setupGetEntryMock(page);
+  await setupSaveEntryMock(page);
+});
+
+test("custom scenario", async ({ page }) => {
+  // Override with specific mock when needed
+  await setupSpecialContentMock(page, 'multiline');
+});
+```
+
+Key benefits of this approach:
+- Endpoint patterns are defined in one place
+- Each mock function is self-contained
+- Default mocks are set up consistently
+- Special case mocks can override defaults
+- Tests are cleaner and focus on behavior
 
 ## Page Objects and Page Actions
 
