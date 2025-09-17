@@ -1,0 +1,19 @@
+{
+  "leapYear": {
+    "name": "Leap year note",
+    "Created_date": "2024-02-29T00:00:00.000Z",
+    "id": "edge-1"
+  },
+  "monthEnds": [
+    {
+      "name": "Month end note - January",
+      "Created_date": "2024-01-31T00:00:00.000Z",
+      "id": "edge-2"
+    },
+    {
+      "name": "Month end note - April",
+      "Created_date": "2024-04-30T00:00:00.000Z",
+      "id": "edge-3"
+    }
+  ]
+}

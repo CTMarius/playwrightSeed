@@ -1,0 +1,22 @@
+{
+  "multiline": {
+    "name": "Line 1\nLine 2\nLine 3",
+    "Created_date": "2024-01-01T00:00:00.000Z",
+    "id": "special-1"
+  },
+  "unicode": {
+    "name": "こんにちは世界 • Hello World 👋",
+    "Created_date": "2024-01-01T00:00:00.000Z",
+    "id": "special-2"
+  },
+  "emoji": {
+    "name": "😀 🌟 🎉 Notes with emojis! 🚀 ✨ 💫",
+    "Created_date": "2024-01-01T00:00:00.000Z",
+    "id": "special-3"
+  },
+  "html": {
+    "name": "Test content without <script>alert('xss')</script> tags",
+    "Created_date": "2024-01-01T00:00:00.000Z",
+    "id": "special-4"
+  }
+}
