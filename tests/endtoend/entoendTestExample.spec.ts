@@ -3,7 +3,7 @@ import { testNotes } from '../../data/testNotes';
 
 const baseURL = "https://keen-ardinghelli-99a36b30.netlify.app/";
 
-test.describe("Notes application E2E Tests", () => {
+test.describe("@regression Notes application E2E Tests", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseURL);
   });
