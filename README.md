@@ -63,9 +63,9 @@ This project contains an end-to-end testing framework built with Playwright, fol
 npx playwright test
 ```
 
-### Run tests in a specific file
+### Run tests using tags
 ```bash
-npx playwright test tests/endtoend/entoendTestExample.spec.ts
+npx playwright test --grep=@regression
 ```
 
 ### Run tests in UI mode
