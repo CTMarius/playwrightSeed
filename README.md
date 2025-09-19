@@ -221,14 +221,3 @@ npx playwright show-report
 6. **Test Organization**: Organize tests by type (e2e, integration, api)
 7. **Type Safety**: Use TypeScript interfaces for better type safety
 8. **Consolidation**: Keep related functionality in a single place (e.g., all page actions in the PageActions class)
-
-## Contributing
-
-1. Create a new branch for your feature
-2. Write tests following the existing patterns
-3. Ensure all tests pass
-4. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details
