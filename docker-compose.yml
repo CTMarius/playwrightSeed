@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ctmar ius/playwright-tests:latest
+    working_dir: /app
+    # Mount the repository so test files and config are available inside container
+    volumes:
+      - ./:/app:cached
+      - /app/node_modules
+    environment:
+      # Default BASE_URL can be overridden via environment or via the --base-url CLI arg we parse.
+      - BASE_URL=${BASE_URL:-http://host.docker.internal:3000}
+      - CI=true
+    # We run tests as one-offs using `docker compose run --rm tests -- <args>`
+    entrypoint: ["/usr/local/bin/run-playwright.sh"]
+    command: ["--reporter=dot"]
+    restart: "no"
+    # If you run the app in the same compose file, ensure the app service and tests share the same network
+    # and set BASE_URL to http://<app-service-name>:<port>. Example (commented):
+    #
+    # app:
+    #   image: your-app-image
+    #   ports:
+    #     - "3000:3000"
+    #   networks:
+    #     - default
+    #
+    # tests:
+    #   ...
+    #   environment:
+    #     - BASE_URL=http://app:3000
+
+# networks:
+#   default:
+#     name: playwright-network
